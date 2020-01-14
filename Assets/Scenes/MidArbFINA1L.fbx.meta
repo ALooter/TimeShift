@@ -1,0 +1,326 @@
+fileFormatVersion: 2
+guid: 7b0dd45e8bee94f46bb8aac6c73c2103
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature.001
+    100004: Armature.002
+    100006: Armature.003
+    100008: Bone
+    100010: Bone 1
+    100012: Bone 2
+    100014: Bone 3
+    100016: Bone.001
+    100018: Bone.001 1
+    100020: Bone.002
+    100022: Bone.002 1
+    100024: Bone.002_end
+    100026: Bone.003
+    100028: Bone.004
+    100030: Bone.005
+    100032: Bone.006
+    100034: Bone.007
+    100036: Bone.008
+    100038: Bone.009
+    100040: Bone.010
+    100042: Bone.011
+    100044: Bone.011_end
+    100046: Bone.012
+    100048: Bone.013
+    100050: Bone.014
+    100052: Bone.015
+    100054: Bone.016
+    100056: Bone.017
+    100058: Bone.018
+    100060: Bone.019
+    100062: Bone.020
+    100064: Bone.021
+    100066: Bone.022
+    100068: Bone.023
+    100070: Bone.023_end
+    100072: Bone_end
+    100074: Bone_end 1
+    100076: Camera
+    100078: Cube
+    100080: Cube.001
+    100082: Cube.002
+    100084: Cube.003
+    100086: Cylinder
+    100088: Cylinder.001
+    100090: Cylinder.002
+    100092: Cylinder.003
+    100094: Cylinder.004
+    100096: Cylinder.005
+    100098: Left_ik
+    100100: Left_ik_end
+    100102: Light
+    100104: //RootNode
+    100106: Right_ik
+    100108: Right_ik_end
+    400000: Armature
+    400002: Armature.001
+    400004: Armature.002
+    400006: Armature.003
+    400008: Bone
+    400010: Bone 1
+    400012: Bone 2
+    400014: Bone 3
+    400016: Bone.001
+    400018: Bone.001 1
+    400020: Bone.002
+    400022: Bone.002 1
+    400024: Bone.002_end
+    400026: Bone.003
+    400028: Bone.004
+    400030: Bone.005
+    400032: Bone.006
+    400034: Bone.007
+    400036: Bone.008
+    400038: Bone.009
+    400040: Bone.010
+    400042: Bone.011
+    400044: Bone.011_end
+    400046: Bone.012
+    400048: Bone.013
+    400050: Bone.014
+    400052: Bone.015
+    400054: Bone.016
+    400056: Bone.017
+    400058: Bone.018
+    400060: Bone.019
+    400062: Bone.020
+    400064: Bone.021
+    400066: Bone.022
+    400068: Bone.023
+    400070: Bone.023_end
+    400072: Bone_end
+    400074: Bone_end 1
+    400076: Camera
+    400078: Cube
+    400080: Cube.001
+    400082: Cube.002
+    400084: Cube.003
+    400086: Cylinder
+    400088: Cylinder.001
+    400090: Cylinder.002
+    400092: Cylinder.003
+    400094: Cylinder.004
+    400096: Cylinder.005
+    400098: Left_ik
+    400100: Left_ik_end
+    400102: Light
+    400104: //RootNode
+    400106: Right_ik
+    400108: Right_ik_end
+    2000000: Camera
+    2100000: Material
+    2100002: No Name
+    2300000: Cube.001
+    2300002: Cube.002
+    2300004: Cylinder.002
+    2300006: Cylinder.003
+    2300008: Cylinder.004
+    2300010: Cylinder.005
+    3300000: Cube.001
+    3300002: Cube.002
+    3300004: Cylinder.002
+    3300006: Cylinder.003
+    3300008: Cylinder.004
+    3300010: Cylinder.005
+    4300000: Cube
+    4300002: Cylinder
+    4300004: Cylinder.001
+    4300006: Cube.001
+    4300008: Cube.002
+    4300010: Cylinder.002
+    4300012: Cylinder.003
+    4300014: Cylinder.004
+    4300016: Cylinder.005
+    4300018: Cube.003
+    7400000: Armature|Armature.001Action.001
+    7400002: Armature|Armature.002Action
+    7400004: Armature|Armature.002Action.001
+    7400006: Armature|ArmatureAction
+    7400008: Armature|Cube.001Action
+    7400010: Armature|Cube.001Action.001
+    7400012: Armature|Cube_Cube.001Action
+    7400014: Armature|Cylinder.002Action.004
+    7400016: Armature|Cylinder.003Action
+    7400018: Armature|Cylinder.004Action
+    7400020: Armature|Cylinder.005Action
+    7400022: Armature|Cylinder.006Action
+    7400024: Armature.001|Armature.001Action.001
+    7400026: Armature.001|Armature.002Action
+    7400028: Armature.001|Armature.002Action.001
+    7400030: Armature.001|Cube.001Action
+    7400032: Armature.001|Cube.001Action.001
+    7400034: Armature.001|Cube_Cube.001Action
+    7400036: Armature.001|Cylinder.002Action.004
+    7400038: Armature.001|Cylinder.003Action
+    7400040: Armature.001|Cylinder.004Action
+    7400042: Armature.001|Cylinder.005Action
+    7400044: Armature.001|Cylinder.006Action
+    7400046: Armature.002|Armature.001Action.001
+    7400048: Armature.002|Armature.002Action
+    7400050: Armature.002|Armature.002Action.001
+    7400052: Armature.002|Cube.001Action
+    7400054: Armature.002|Cube.001Action.001
+    7400056: Armature.002|Cube_Cube.001Action
+    7400058: Armature.002|Cylinder.002Action.004
+    7400060: Armature.002|Cylinder.003Action
+    7400062: Armature.002|Cylinder.004Action
+    7400064: Armature.002|Cylinder.005Action
+    7400066: Armature.002|Cylinder.006Action
+    7400068: Armature.003|Armature.001Action.001
+    7400070: Armature.003|Armature.002Action
+    7400072: Armature.003|Armature.002Action.001
+    7400074: Armature.003|Cube.001Action
+    7400076: Armature.003|Cube.001Action.001
+    7400078: Armature.003|Cube_Cube.001Action
+    7400080: Armature.003|Cylinder.002Action.004
+    7400082: Armature.003|Cylinder.003Action
+    7400084: Armature.003|Cylinder.004Action
+    7400086: Armature.003|Cylinder.005Action
+    7400088: Armature.003|Cylinder.006Action
+    7400090: Cube.001|Cube.001Action
+    7400092: Cube.001|Cube.001Action.001
+    7400094: Cube.001|Cube_Cube.001Action
+    7400096: Cube.001|Cylinder.002Action.004
+    7400098: Cube.001|Cylinder.003Action
+    7400100: Cube.001|Cylinder.004Action
+    7400102: Cube.001|Cylinder.005Action
+    7400104: Cube.001|Cylinder.006Action
+    7400106: Cube.002|Cube.001Action
+    7400108: Cube.002|Cube.001Action.001
+    7400110: Cube.002|Cube_Cube.001Action
+    7400112: Cube.002|Cylinder.002Action.004
+    7400114: Cube.002|Cylinder.003Action
+    7400116: Cube.002|Cylinder.004Action
+    7400118: Cube.002|Cylinder.005Action
+    7400120: Cube.002|Cylinder.006Action
+    7400122: Cylinder.002|Cube.001Action
+    7400124: Cylinder.002|Cube.001Action.001
+    7400126: Cylinder.002|Cube_Cube.001Action
+    7400128: Cylinder.002|Cylinder.002Action.004
+    7400130: Cylinder.002|Cylinder.003Action
+    7400132: Cylinder.002|Cylinder.004Action
+    7400134: Cylinder.002|Cylinder.005Action
+    7400136: Cylinder.002|Cylinder.006Action
+    7400138: Cylinder.003|Cube.001Action
+    7400140: Cylinder.003|Cube.001Action.001
+    7400142: Cylinder.003|Cube_Cube.001Action
+    7400144: Cylinder.003|Cylinder.002Action.004
+    7400146: Cylinder.003|Cylinder.003Action
+    7400148: Cylinder.003|Cylinder.004Action
+    7400150: Cylinder.003|Cylinder.005Action
+    7400152: Cylinder.003|Cylinder.006Action
+    7400154: Cylinder.004|Cube.001Action
+    7400156: Cylinder.004|Cube.001Action.001
+    7400158: Cylinder.004|Cube_Cube.001Action
+    7400160: Cylinder.004|Cylinder.002Action.004
+    7400162: Cylinder.004|Cylinder.003Action
+    7400164: Cylinder.004|Cylinder.004Action
+    7400166: Cylinder.004|Cylinder.005Action
+    7400168: Cylinder.004|Cylinder.006Action
+    7400170: Cylinder.005|Cube.001Action
+    7400172: Cylinder.005|Cube.001Action.001
+    7400174: Cylinder.005|Cube_Cube.001Action
+    7400176: Cylinder.005|Cylinder.002Action.004
+    7400178: Cylinder.005|Cylinder.003Action
+    7400180: Cylinder.005|Cylinder.004Action
+    7400182: Cylinder.005|Cylinder.005Action
+    7400184: Cylinder.005|Cylinder.006Action
+    9500000: //RootNode
+    10800000: Light
+    13700000: Cube
+    13700002: Cube.003
+    13700004: Cylinder
+    13700006: Cylinder.001
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
