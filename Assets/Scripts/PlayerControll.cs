@@ -24,6 +24,8 @@ public class PlayerControll : MonoBehaviour
     public float[,] TimeCoordinates = new float[50, 3];
     int i;
     int a;
+    public bool placemode = false;
+    private LineRenderer objectLineRenderer;
 
     public float playerspeed;
 
@@ -186,6 +188,9 @@ public class PlayerControll : MonoBehaviour
 
         //light
         playerlightcolor = playerlight.color;
+        //line renderer
+        objectLineRenderer = rb.GetComponent<LineRenderer>();
+        objectLineRenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -218,26 +223,51 @@ public class PlayerControll : MonoBehaviour
     }
     void FixedUpdate()
     {
+        //placemode 
+        if (placemode == true)
+        {
+
+        }
         WorldControlScript = GameObject.Find("WorldController").GetComponent<WorldControl>();
         TimeCoordinates[0, 0] = transform.position.x;
         TimeCoordinates[0, 1] = transform.position.z;
         TimeCoordinates[0, 2] = transform.rotation.y;
         if (stun == false)
         {
-            //rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
-            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            //placemode trigger
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                transform.forward = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-                rb.velocity = transform.forward * playerspeed;
+                //placecontainter = placemode;
+                rb.velocity = new Vector3(0, 0, 0);
+                placemode = !placemode;
+                objectLineRenderer.enabled = !objectLineRenderer.enabled;
             }
-            if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+
+            //rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
+            if (placemode == false)
             {
-                if (stun == false)
+                if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                 {
-                    rb.velocity = new Vector3(0,0,0);
+
+                    transform.forward = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+                    rb.velocity = transform.forward * playerspeed;
+
+                }
+                if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+                {
+                    if (stun == false)
+                    {
+                        rb.velocity = new Vector3(0, 0, 0);
+                    }
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Mouse0) == true)
+            if (placemode == true)
+            {
+                transform.Rotate(0.0f, Input.GetAxis("Horizontal") * 5.0f, 0.0f);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse0) == true && placemode == true)
         {
 
             Rigidbody clone;
