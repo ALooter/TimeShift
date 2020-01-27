@@ -6,11 +6,15 @@ public class WorldControl : MonoBehaviour
 {
     public bool PlayerOneWorld = false;
     public bool PlayerOneCD = false;
-    public bool ZaWarudo = false;
+    public bool ZaWarudo1 = false;
     private PlayerControll PlayerOneScript;
+    public bool PlayerTwoWorld = false;
+    public bool PlayerTwoCD = false;
+    public bool ZaWarudo2 = false;
+    private PlayerControll PlayerTwoScript;
     void PlayerOneWorldControl()
     {
-        ZaWarudo = false;
+        ZaWarudo1 = false;
     }
     void PlayerOneWorldCD()
     {
@@ -25,14 +29,14 @@ public class WorldControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        PlayerOneScript = GameObject.Find("PlayerCube").GetComponent<PlayerControll>();
+        PlayerOneScript = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
         PlayerOneWorld = PlayerOneScript.ZaWarudo;
 
         if (PlayerOneWorld == true)
             if (PlayerOneCD == false)
             {
                 {
-                    ZaWarudo = true;
+                    ZaWarudo1 = true;
                     PlayerOneCD = true;
                     Invoke("PlayerOneWorldControl", 5f);
                     Invoke("PlayerOneWorldCD", 10f);

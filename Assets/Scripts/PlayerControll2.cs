@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PlayerControll : MonoBehaviour
+public class PlayerControll2 : MonoBehaviour
 {
     public Rigidbody rb;
     public bool Left = false;
@@ -28,7 +28,7 @@ public class PlayerControll : MonoBehaviour
     public bool placemode = false;
     private LineRenderer objectLineRenderer;
     public float rotation;
-    
+
     public float playerspeed;
 
     //abilities cooldowns
@@ -126,12 +126,12 @@ public class PlayerControll : MonoBehaviour
         {
             TimeCoordinates[i, 0] = TimeCoordinates[i - 1, 0];
         }
-   
+
         for (i = 49; i > 0; i--)
         {
             TimeCoordinates[i, 1] = TimeCoordinates[i - 1, 1];
         }
-     
+
         for (i = 49; i > 0; i--)
         {
             TimeCoordinates[i, 2] = TimeCoordinates[i - 1, 2];
@@ -147,7 +147,7 @@ public class PlayerControll : MonoBehaviour
             stun = false;
             rb.velocity = new Vector3(0, 0, 0);
         }
-        
+
 
     }
     IEnumerator Tracer()
@@ -248,14 +248,14 @@ public class PlayerControll : MonoBehaviour
             //rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
             if (placemode == false)
             {
-                if (Mathf.Abs(Input.GetAxis("Horizontal1")) > 0.0f || Mathf.Abs(Input.GetAxis("Vertical1")) > 0.0f)
+                if (Mathf.Abs(Input.GetAxis("Horizontal2")) > 0.0f || Mathf.Abs(Input.GetAxis("Vertical2")) > 0.0f)
                 {
-                    rb.velocity = new Vector3(Input.GetAxis("Horizontal1"), 0, Input.GetAxis("Vertical1"));
-                    rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
+                    rb.velocity = new Vector3(Input.GetAxis("Horizontal2"), 0, Input.GetAxis("Vertical2"));
+                    rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
                     rotation = transform.localEulerAngles.y;
-                    
+
                 }
-                if (Mathf.Abs(Input.GetAxis("Horizontal1")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical1")) == 0.0f)
+                if (Mathf.Abs(Input.GetAxis("Horizontal2")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical2")) == 0.0f)
                 {
                     transform.localEulerAngles = new Vector3(0, rotation, 0);
 
@@ -280,17 +280,17 @@ public class PlayerControll : MonoBehaviour
             }
             if (placemode == true)
             {
-                rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
+                rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse0) == true && placemode == true)
-        {
+            {
 
-            Rigidbody clone;
-            clone = Instantiate(trap1, transform.position, transform.rotation);
+                Rigidbody clone;
+                clone = Instantiate(trap1, transform.position, transform.rotation);
 
 
-        }
+            }
             if (Input.GetKeyDown("1") && kapkancd <= 0)
             {
                 kapkancd = kapkanmaxcd;
@@ -301,9 +301,9 @@ public class PlayerControll : MonoBehaviour
             {
                 minecd = minemaxcd;
                 Vector3 mineoffset;
-                mineoffset.x = Input.GetAxisRaw("Horizontal1");
+                mineoffset.x = Input.GetAxisRaw("Horizontal2");
                 mineoffset.y = 0f;
-                mineoffset.z = Input.GetAxisRaw("Vertical1");
+                mineoffset.z = Input.GetAxisRaw("Vertical2");
                 Rigidbody mine_clone;
                 mine_clone = Instantiate(mineprefab, transform.position + 3 * mineoffset, transform.rotation);
             }
@@ -312,9 +312,9 @@ public class PlayerControll : MonoBehaviour
             {
                 spikescd = spikesmaxcd;
                 Vector3 spikesoffset;
-                spikesoffset.x = Input.GetAxisRaw("Horizontal1");
+                spikesoffset.x = Input.GetAxisRaw("Horizontal2");
                 spikesoffset.y = 0f;
-                spikesoffset.z = Input.GetAxisRaw("Vertical1");
+                spikesoffset.z = Input.GetAxisRaw("Vertical2");
                 Rigidbody mine_clone;
                 mine_clone = Instantiate(spikesprefab, transform.position + 3 * spikesoffset, transform.rotation);
             }
@@ -326,7 +326,7 @@ public class PlayerControll : MonoBehaviour
         }
 
 
-        
+
         TimeShift = Input.GetKey("e");
         if (TimeShift == true)
         {
@@ -350,6 +350,6 @@ public class PlayerControll : MonoBehaviour
             }
         }
 
-        
+
     }
 }
