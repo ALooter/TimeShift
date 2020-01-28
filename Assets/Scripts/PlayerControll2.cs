@@ -226,10 +226,6 @@ public class PlayerControll2 : MonoBehaviour
     void FixedUpdate()
     {
         //placemode 
-        if (placemode == true)
-        {
-
-        }
         WorldControlScript = GameObject.Find("WorldController").GetComponent<WorldControl>();
         TimeCoordinates[0, 0] = transform.position.x;
         TimeCoordinates[0, 1] = transform.position.z;
@@ -237,7 +233,7 @@ public class PlayerControll2 : MonoBehaviour
         if (stun == false)
         {
             //placemode trigger
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetAxis("Placemode2") > 0)
             {
                 //placecontainter = placemode;
                 rb.velocity = new Vector3(0, 0, 0);
@@ -283,21 +279,22 @@ public class PlayerControll2 : MonoBehaviour
                 rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) == true && placemode == true)
+            if (Input.GetAxis("BallistaKapkan2") > 0 && placemode == true && balistacd <= 0)
             {
 
                 Rigidbody clone;
                 clone = Instantiate(trap1, transform.position, transform.rotation);
+                balistacd = balistamaxcd;
 
 
             }
-            if (Input.GetKeyDown("1") && kapkancd <= 0)
+            if (Input.GetAxis("BallistaKapkan2") < 0 && kapkancd <= 0)
             {
                 kapkancd = kapkanmaxcd;
 
             }
 
-            if (Input.GetKeyDown("2") && minecd <= 0)
+            if (Input.GetAxis("SpikeMine2") > 0 && minecd <= 0)
             {
                 minecd = minemaxcd;
                 Vector3 mineoffset;
@@ -308,7 +305,7 @@ public class PlayerControll2 : MonoBehaviour
                 mine_clone = Instantiate(mineprefab, transform.position + 3 * mineoffset, transform.rotation);
             }
 
-            if (Input.GetKeyDown("3") && spikescd <= 0)
+            if (Input.GetAxis("SpikeMine2") < 0 && spikescd <= 0)
             {
                 spikescd = spikesmaxcd;
                 Vector3 spikesoffset;

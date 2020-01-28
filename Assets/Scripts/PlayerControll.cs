@@ -229,10 +229,6 @@ public class PlayerControll : MonoBehaviour
     void FixedUpdate()
     {
         //placemode 
-        if (placemode == true)
-        {
-
-        }
         WorldControlScript = GameObject.Find("WorldController").GetComponent<WorldControl>();
         TimeCoordinates[0, 0] = transform.position.x;
         TimeCoordinates[0, 1] = transform.position.z;
@@ -240,7 +236,9 @@ public class PlayerControll : MonoBehaviour
         if (stun == false)
         {
             //placemode trigger
+
             if (Input.GetButtonDown("Construction"))
+
             {
                 //placecontainter = placemode;
                 rb.velocity = new Vector3(0, 0, 0);
@@ -286,6 +284,7 @@ public class PlayerControll : MonoBehaviour
                 rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
             }
 
+
             if (Input.GetButtonDown("Balista") == true && placemode == true && balistacd < 0f)
         {
 
@@ -296,12 +295,15 @@ public class PlayerControll : MonoBehaviour
 
         }
             if (Input.GetButtonDown("Kapkan") && kapkancd <= 0)
+
             {
                 kapkancd = kapkanmaxcd;
 
             }
 
+
             if (Input.GetButtonDown("Mine") && minecd <= 0)
+
             {
                 minecd = minemaxcd;
                 Vector3 mineoffset;
@@ -312,7 +314,9 @@ public class PlayerControll : MonoBehaviour
                 mine_clone = Instantiate(mineprefab, transform.position + 3 * mineoffset, transform.rotation);
             }
 
+
             if (Input.GetButtonDown("Spikes") && spikescd <= 0)
+
             {
                 spikescd = spikesmaxcd;
                 Vector3 spikesoffset;
