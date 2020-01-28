@@ -31,6 +31,9 @@ public class PlayerControll : MonoBehaviour
     
     public float playerspeed;
 
+    //speed_coef - movement speed is multiplyed by this value (easy way to make hero faster/slower)
+    public float speed_coef;
+
     //abilities cooldowns
     public float zawarudomaxcd = 10f;
     public float zawarudocd = 0f;
@@ -237,7 +240,7 @@ public class PlayerControll : MonoBehaviour
         if (stun == false)
         {
             //placemode trigger
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetButtonDown("Construction"))
             {
                 //placecontainter = placemode;
                 rb.velocity = new Vector3(0, 0, 0);
@@ -250,7 +253,7 @@ public class PlayerControll : MonoBehaviour
             {
                 if (Mathf.Abs(Input.GetAxis("Horizontal1")) > 0.0f || Mathf.Abs(Input.GetAxis("Vertical1")) > 0.0f)
                 {
-                    rb.velocity = new Vector3(Input.GetAxis("Horizontal1"), 0, Input.GetAxis("Vertical1"));
+                    rb.velocity = new Vector3(Input.GetAxis("Horizontal1")*speed_coef, 0, Input.GetAxis("Vertical1") * speed_coef);
                     rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
                     rotation = transform.localEulerAngles.y;
                     
@@ -258,7 +261,7 @@ public class PlayerControll : MonoBehaviour
                 if (Mathf.Abs(Input.GetAxis("Horizontal1")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical1")) == 0.0f)
                 {
                     transform.localEulerAngles = new Vector3(0, rotation, 0);
-
+                    rb.velocity = new Vector3(0, 0, 0);
                 }
 
                 //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
@@ -283,21 +286,22 @@ public class PlayerControll : MonoBehaviour
                 rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) == true && placemode == true)
+            if (Input.GetButtonDown("Balista") == true && placemode == true && balistacd < 0f)
         {
 
-            Rigidbody clone;
-            clone = Instantiate(trap1, transform.position, transform.rotation);
+                Rigidbody clone;
+                clone = Instantiate(trap1, transform.position, transform.rotation);
+                balistacd = balistamaxcd;
 
 
         }
-            if (Input.GetKeyDown("1") && kapkancd <= 0)
+            if (Input.GetButtonDown("Kapkan") && kapkancd <= 0)
             {
                 kapkancd = kapkanmaxcd;
 
             }
 
-            if (Input.GetKeyDown("2") && minecd <= 0)
+            if (Input.GetButtonDown("Mine") && minecd <= 0)
             {
                 minecd = minemaxcd;
                 Vector3 mineoffset;
@@ -308,7 +312,7 @@ public class PlayerControll : MonoBehaviour
                 mine_clone = Instantiate(mineprefab, transform.position + 3 * mineoffset, transform.rotation);
             }
 
-            if (Input.GetKeyDown("3") && spikescd <= 0)
+            if (Input.GetButtonDown("Spikes") && spikescd <= 0)
             {
                 spikescd = spikesmaxcd;
                 Vector3 spikesoffset;
@@ -327,8 +331,8 @@ public class PlayerControll : MonoBehaviour
 
 
         
-        TimeShift = Input.GetKey("e");
-        if (TimeShift == true)
+        TimeShift = Input.GetButton("Timeshift");
+        if (TimeShift == true && timeshiftcd < 0f)
         {
             timeshiftcd = timeshiftmaxcd;
             if (stun == true)
@@ -339,8 +343,8 @@ public class PlayerControll : MonoBehaviour
             StartCoroutine(Tracer());
             stun = false;
         }
-        ZaWarudo = Input.GetKey("x");
-        if (ZaWarudo == true)
+        ZaWarudo = Input.GetButton("Zawarudo");
+        if (ZaWarudo == true && zawarudocd < 0f)
         {
             zawarudocd = zawarudomaxcd;
             playerlight.color = Color.blue;

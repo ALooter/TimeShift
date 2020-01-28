@@ -4290,6 +4290,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCube2
       objectReference: {fileID: 0}
+    - target: {fileID: 4803738206483566277, guid: f383cebc4dc6d054db8553ae59f7d777,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6520542627116579941, guid: f383cebc4dc6d054db8553ae59f7d777,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -78530,6 +78535,14 @@ PrefabInstance:
       propertyPath: pausecanvas
       value: 
       objectReference: {fileID: 870599710}
+    - target: {fileID: 592383305, guid: f6ee292fea2e12e47a93fcffe978cf8c, type: 3}
+      propertyPath: speed_coef
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 592383305, guid: f6ee292fea2e12e47a93fcffe978cf8c, type: 3}
+      propertyPath: TimeShift
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3053311534383047091, guid: f6ee292fea2e12e47a93fcffe978cf8c,
         type: 3}
       propertyPath: m_Name

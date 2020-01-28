@@ -85,7 +85,7 @@ public class BallistaAutoFire : MonoBehaviour
                     }
             }
         }
-        PlayerControllScript = GameObject.Find("PlayerCube").GetComponent<PlayerControll>();
+        PlayerControllScript = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
         if (PlayerControllScript.TimeShift == true)
         {
             if (TimeCoordinates[49, 0] == 0)
