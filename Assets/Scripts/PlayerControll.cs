@@ -237,7 +237,7 @@ public class PlayerControll : MonoBehaviour
         {
             //placemode trigger
 
-            if (Input.GetButtonDown("Construction"))
+            if (Input.GetButtonDown("Construction1"))
 
             {
                 //placecontainter = placemode;
@@ -285,7 +285,7 @@ public class PlayerControll : MonoBehaviour
             }
 
 
-            if (Input.GetButtonDown("Balista") == true && placemode == true && balistacd < 0f)
+            if (Input.GetButtonDown("Balista1") == true && placemode == true && balistacd < 0f)
         {
 
                 Rigidbody clone;
@@ -294,7 +294,7 @@ public class PlayerControll : MonoBehaviour
 
 
         }
-            if (Input.GetButtonDown("Kapkan") && kapkancd <= 0)
+            if (Input.GetButtonDown("Kapkan1") && kapkancd <= 0)
 
             {
                 kapkancd = kapkanmaxcd;
@@ -302,7 +302,7 @@ public class PlayerControll : MonoBehaviour
             }
 
 
-            if (Input.GetButtonDown("Mine") && minecd <= 0)
+            if (Input.GetButtonDown("Mine1") && minecd <= 0)
 
             {
                 minecd = minemaxcd;
@@ -315,7 +315,7 @@ public class PlayerControll : MonoBehaviour
             }
 
 
-            if (Input.GetButtonDown("Spikes") && spikescd <= 0)
+            if (Input.GetButtonDown("Spikes1") && spikescd <= 0)
 
             {
                 spikescd = spikesmaxcd;
@@ -335,7 +335,7 @@ public class PlayerControll : MonoBehaviour
 
 
         
-        TimeShift = Input.GetButton("Timeshift");
+        TimeShift = Input.GetButton("Timeshift1");
         if (TimeShift == true && timeshiftcd < 0f)
         {
             timeshiftcd = timeshiftmaxcd;
@@ -347,7 +347,7 @@ public class PlayerControll : MonoBehaviour
             StartCoroutine(Tracer());
             stun = false;
         }
-        ZaWarudo = Input.GetButton("Zawarudo");
+        ZaWarudo = Input.GetButton("Zawarudo1");
         if (ZaWarudo == true && zawarudocd < 0f)
         {
             zawarudocd = zawarudomaxcd;

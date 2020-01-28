@@ -8,10 +8,11 @@ public class WorldControl : MonoBehaviour
     public bool PlayerOneCD = false;
     public bool ZaWarudo1 = false;
     private PlayerControll PlayerOneScript;
+    private PlayerControll2 PlayerTwoScript;
     public bool PlayerTwoWorld = false;
     public bool PlayerTwoCD = false;
     public bool ZaWarudo2 = false;
-    private PlayerControll PlayerTwoScript;
+   // private PlayerControll PlayerTwoScript;
     void PlayerOneWorldControl()
     {
         ZaWarudo1 = false;
@@ -31,8 +32,10 @@ public class WorldControl : MonoBehaviour
     {
         PlayerOneScript = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
         PlayerOneWorld = PlayerOneScript.ZaWarudo;
+        PlayerTwoScript = GameObject.Find("PlayerCube2").GetComponent<PlayerControll2>();
+        PlayerTwoWorld = PlayerOneScript.ZaWarudo;
 
-        if (PlayerOneWorld == true)
+        if (PlayerOneWorld == true || PlayerTwoWorld == true)
             if (PlayerOneCD == false)
             {
                 {

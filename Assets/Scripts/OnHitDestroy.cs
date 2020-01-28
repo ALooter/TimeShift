@@ -61,7 +61,7 @@ public class OnHitDestroy : MonoBehaviour
     {
         rb.velocity = transform.TransformDirection(Vector3.forward * 10);
         WorldControlScript = GameObject.Find("WorldController").GetComponent<WorldControl>();
-        PlayerControllScript = GameObject.Find("PlayerCube").GetComponent<PlayerControll>();
+        PlayerControllScript = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
         if (WorldControlScript.ZaWarudo1 == true)
         {
             rb.velocity = rb.velocity * 0;

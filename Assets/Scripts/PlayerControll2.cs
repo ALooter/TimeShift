@@ -233,7 +233,7 @@ public class PlayerControll2 : MonoBehaviour
         if (stun == false)
         {
             //placemode trigger
-            if (Input.GetAxis("Placemode2") > 0)
+            if (Input.GetButtonDown("Construction2"))
             {
                 //placecontainter = placemode;
                 rb.velocity = new Vector3(0, 0, 0);
@@ -254,7 +254,7 @@ public class PlayerControll2 : MonoBehaviour
                 if (Mathf.Abs(Input.GetAxis("Horizontal2")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical2")) == 0.0f)
                 {
                     transform.localEulerAngles = new Vector3(0, rotation, 0);
-
+                    rb.velocity = new Vector3(0, 0, 0);
                 }
 
                 //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
@@ -279,7 +279,7 @@ public class PlayerControll2 : MonoBehaviour
                 rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
             }
 
-            if (Input.GetAxis("BallistaKapkan2") > 0 && placemode == true && balistacd <= 0)
+            if (Input.GetButtonDown("Balista2") == true && placemode == true && balistacd < 0f)
             {
 
                 Rigidbody clone;
@@ -288,13 +288,16 @@ public class PlayerControll2 : MonoBehaviour
 
 
             }
-            if (Input.GetAxis("BallistaKapkan2") < 0 && kapkancd <= 0)
+            if (Input.GetButtonDown("Kapkan2") && kapkancd <= 0)
+
             {
                 kapkancd = kapkanmaxcd;
 
             }
 
-            if (Input.GetAxis("SpikeMine2") > 0 && minecd <= 0)
+
+            if (Input.GetButtonDown("Mine2") && minecd <= 0)
+
             {
                 minecd = minemaxcd;
                 Vector3 mineoffset;
@@ -305,7 +308,9 @@ public class PlayerControll2 : MonoBehaviour
                 mine_clone = Instantiate(mineprefab, transform.position + 3 * mineoffset, transform.rotation);
             }
 
-            if (Input.GetAxis("SpikeMine2") < 0 && spikescd <= 0)
+
+            if (Input.GetButtonDown("Spikes2") && spikescd <= 0)
+
             {
                 spikescd = spikesmaxcd;
                 Vector3 spikesoffset;
@@ -324,8 +329,8 @@ public class PlayerControll2 : MonoBehaviour
 
 
 
-        TimeShift = Input.GetKey("e");
-        if (TimeShift == true)
+        TimeShift = Input.GetButton("Timeshift2");
+        if (TimeShift == true && timeshiftcd < 0f)
         {
             timeshiftcd = timeshiftmaxcd;
             if (stun == true)
@@ -336,8 +341,8 @@ public class PlayerControll2 : MonoBehaviour
             StartCoroutine(Tracer());
             stun = false;
         }
-        ZaWarudo = Input.GetKey("x");
-        if (ZaWarudo == true)
+        ZaWarudo = Input.GetButton("Zawarudo2");
+        if (ZaWarudo == true && zawarudocd < 0f)
         {
             zawarudocd = zawarudomaxcd;
             playerlight.color = Color.blue;
