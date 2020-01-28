@@ -70,7 +70,6 @@ InputManager:
     axis: 1
     joyNum: 2
   - serializedVersion: 3
-
     m_Name: Kapkan
     descriptiveName: 
     descriptiveNegativeName: 
@@ -110,12 +109,10 @@ InputManager:
     positiveButton: 2
     altNegativeButton: 
     altPositiveButton: joystick button 1
-
     gravity: 0
     dead: 0
     sensitivity: 1
     snap: 0
-
     invert: 1
     type: 0
     axis: 1
@@ -128,33 +125,26 @@ InputManager:
     positiveButton: mouse 0
     altNegativeButton: 
     altPositiveButton: joystick button 0
-
     gravity: 0
     dead: 0
     sensitivity: 1
     snap: 0
-
     invert: 1
-
     type: 0
     axis: 1
     joyNum: 1
   - serializedVersion: 3
-
-
-    m_Name: SpikeMine1
+    m_Name: Zawarudo
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: joystick button 2
-    positiveButton: joystick button 3
+    negativeButton: 
+    positiveButton: x
     altNegativeButton: 
-    altPositiveButton: 
-
+    altPositiveButton: joystick button 5
     gravity: 0
     dead: 0
     sensitivity: 1
     snap: 0
-
     invert: 1
     type: 0
     axis: 1
@@ -167,12 +157,10 @@ InputManager:
     positiveButton: e
     altNegativeButton: 
     altPositiveButton: joystick button 4
-
     gravity: 0
     dead: 0
     sensitivity: 1
     snap: 0
-
     invert: 1
     type: 0
     axis: 1
@@ -185,19 +173,15 @@ InputManager:
     positiveButton: enter
     altNegativeButton: 
     altPositiveButton: joystick button 0
-
     gravity: 0
     dead: 0
     sensitivity: 1
     snap: 0
-
     invert: 1
-
     type: 0
     axis: 1
     joyNum: 1
   - serializedVersion: 3
-
     m_Name: Cancel
     descriptiveName: 
     descriptiveNegativeName: 
@@ -219,14 +203,12 @@ InputManager:
     descriptiveNegativeName: 
     negativeButton: a
     positiveButton: d
-
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
     dead: 0
     sensitivity: 1
     snap: 0
-
     invert: 1
     type: 0
     axis: 1
@@ -263,4 +245,3 @@ InputManager:
     type: 0
     axis: 1
     joyNum: 1
-
