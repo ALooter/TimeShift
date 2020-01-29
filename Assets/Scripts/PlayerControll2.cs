@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PlayerControll : MonoBehaviour
+public class PlayerControll2 : MonoBehaviour
 {
     public Rigidbody rb;
     public bool Left = false;
@@ -28,11 +28,8 @@ public class PlayerControll : MonoBehaviour
     public bool placemode = false;
     private LineRenderer objectLineRenderer;
     public float rotation;
-    
-    public float playerspeed;
 
-    //speed_coef - movement speed is multiplyed by this value (easy way to make hero faster/slower)
-    public float speed_coef;
+    public float playerspeed;
 
     //abilities cooldowns
     public float zawarudomaxcd = 10f;
@@ -129,12 +126,12 @@ public class PlayerControll : MonoBehaviour
         {
             TimeCoordinates[i, 0] = TimeCoordinates[i - 1, 0];
         }
-   
+
         for (i = 49; i > 0; i--)
         {
             TimeCoordinates[i, 1] = TimeCoordinates[i - 1, 1];
         }
-     
+
         for (i = 49; i > 0; i--)
         {
             TimeCoordinates[i, 2] = TimeCoordinates[i - 1, 2];
@@ -150,7 +147,7 @@ public class PlayerControll : MonoBehaviour
             stun = false;
             rb.velocity = new Vector3(0, 0, 0);
         }
-        
+
 
     }
     IEnumerator Tracer()
@@ -236,9 +233,7 @@ public class PlayerControll : MonoBehaviour
         if (stun == false)
         {
             //placemode trigger
-
-            if (Input.GetButtonDown("Construction1"))
-
+            if (Input.GetButtonDown("Construction2"))
             {
                 //placecontainter = placemode;
                 rb.velocity = new Vector3(0, 0, 0);
@@ -249,14 +244,14 @@ public class PlayerControll : MonoBehaviour
             //rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
             if (placemode == false)
             {
-                if (Mathf.Abs(Input.GetAxis("Horizontal1")) > 0.0f || Mathf.Abs(Input.GetAxis("Vertical1")) > 0.0f)
+                if (Mathf.Abs(Input.GetAxis("Horizontal2")) > 0.0f || Mathf.Abs(Input.GetAxis("Vertical2")) > 0.0f)
                 {
-                    rb.velocity = new Vector3(Input.GetAxis("Horizontal1")*speed_coef, 0, Input.GetAxis("Vertical1") * speed_coef);
-                    rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
+                    rb.velocity = new Vector3(Input.GetAxis("Horizontal2"), 0, Input.GetAxis("Vertical2"));
+                    rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
                     rotation = transform.localEulerAngles.y;
-                    
+
                 }
-                if (Mathf.Abs(Input.GetAxis("Horizontal1")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical1")) == 0.0f)
+                if (Mathf.Abs(Input.GetAxis("Horizontal2")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical2")) == 0.0f)
                 {
                     transform.localEulerAngles = new Vector3(0, rotation, 0);
                     rb.velocity = new Vector3(0, 0, 0);
@@ -281,20 +276,19 @@ public class PlayerControll : MonoBehaviour
             }
             if (placemode == true)
             {
-                rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
+                rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
             }
 
-
-            if (Input.GetButtonDown("Balista1") == true && placemode == true && balistacd < 0f)
-        {
+            if (Input.GetButtonDown("Balista2") == true && placemode == true && balistacd < 0f)
+            {
 
                 Rigidbody clone;
                 clone = Instantiate(trap1, transform.position, transform.rotation);
                 balistacd = balistamaxcd;
 
 
-        }
-            if (Input.GetButtonDown("Kapkan1") && kapkancd <= 0)
+            }
+            if (Input.GetButtonDown("Kapkan2") && kapkancd <= 0)
 
             {
                 kapkancd = kapkanmaxcd;
@@ -302,27 +296,27 @@ public class PlayerControll : MonoBehaviour
             }
 
 
-            if (Input.GetButtonDown("Mine1") && minecd <= 0)
+            if (Input.GetButtonDown("Mine2") && minecd <= 0)
 
             {
                 minecd = minemaxcd;
                 Vector3 mineoffset;
-                mineoffset.x = Input.GetAxisRaw("Horizontal1");
+                mineoffset.x = Input.GetAxisRaw("Horizontal2");
                 mineoffset.y = 0f;
-                mineoffset.z = Input.GetAxisRaw("Vertical1");
+                mineoffset.z = Input.GetAxisRaw("Vertical2");
                 Rigidbody mine_clone;
                 mine_clone = Instantiate(mineprefab, transform.position + 3 * mineoffset, transform.rotation);
             }
 
 
-            if (Input.GetButtonDown("Spikes1") && spikescd <= 0)
+            if (Input.GetButtonDown("Spikes2") && spikescd <= 0)
 
             {
                 spikescd = spikesmaxcd;
                 Vector3 spikesoffset;
-                spikesoffset.x = Input.GetAxisRaw("Horizontal1");
+                spikesoffset.x = Input.GetAxisRaw("Horizontal2");
                 spikesoffset.y = 0f;
-                spikesoffset.z = Input.GetAxisRaw("Vertical1");
+                spikesoffset.z = Input.GetAxisRaw("Vertical2");
                 Rigidbody mine_clone;
                 mine_clone = Instantiate(spikesprefab, transform.position + 3 * spikesoffset, transform.rotation);
             }
@@ -334,8 +328,8 @@ public class PlayerControll : MonoBehaviour
         }
 
 
-        
-        TimeShift = Input.GetButton("Timeshift1");
+
+        TimeShift = Input.GetButton("Timeshift2");
         if (TimeShift == true && timeshiftcd < 0f)
         {
             timeshiftcd = timeshiftmaxcd;
@@ -347,7 +341,7 @@ public class PlayerControll : MonoBehaviour
             StartCoroutine(Tracer());
             stun = false;
         }
-        ZaWarudo = Input.GetButton("Zawarudo1");
+        ZaWarudo = Input.GetButton("Zawarudo2");
         if (ZaWarudo == true && zawarudocd < 0f)
         {
             zawarudocd = zawarudomaxcd;
@@ -358,6 +352,6 @@ public class PlayerControll : MonoBehaviour
             }
         }
 
-        
+
     }
 }

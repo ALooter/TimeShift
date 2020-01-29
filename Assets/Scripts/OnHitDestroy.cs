@@ -29,7 +29,7 @@ public class OnHitDestroy : MonoBehaviour
             ContactPoint contact = collision.contacts[0];
             if (ricochet == true)
             {
-                if (WorldControlScript.ZaWarudo == false)
+                if (WorldControlScript.ZaWarudo1 == false)
                 {
                     Invoke("Destroy", 0);
                 }
@@ -43,7 +43,7 @@ public class OnHitDestroy : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         { 
-            if (WorldControlScript.ZaWarudo == false)
+            if (WorldControlScript.ZaWarudo1 == false)
             {
                 Invoke("Destroy", 0);
             }
@@ -61,8 +61,8 @@ public class OnHitDestroy : MonoBehaviour
     {
         rb.velocity = transform.TransformDirection(Vector3.forward * 10);
         WorldControlScript = GameObject.Find("WorldController").GetComponent<WorldControl>();
-        PlayerControllScript = GameObject.Find("PlayerCube").GetComponent<PlayerControll>();
-        if (WorldControlScript.ZaWarudo == true)
+        PlayerControllScript = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
+        if (WorldControlScript.ZaWarudo1 == true)
         {
             rb.velocity = rb.velocity * 0;
         }

@@ -67,7 +67,7 @@ public class BallistaAutoFire : MonoBehaviour
     {
         TimeCoordinates[0, 0] = 1;
         WorldControlScript = GameObject.Find("WorldController").GetComponent<WorldControl>();
-        check = WorldControlScript.ZaWarudo;
+        check = WorldControlScript.ZaWarudo1;
         Debug.DrawRay(transform.position, transform.forward * 10, Color.green);
         
         //int LayerMask = 1 << 11;
@@ -76,7 +76,7 @@ public class BallistaAutoFire : MonoBehaviour
         {if (hit.collider.tag == "Player")
             {
                 if (activated == true)
-                    if (WorldControlScript.ZaWarudo == false)
+                    if (WorldControlScript.ZaWarudo1 == false)
                     {
                         {
                             Invoke("Fire", 0f);
@@ -85,7 +85,7 @@ public class BallistaAutoFire : MonoBehaviour
                     }
             }
         }
-        PlayerControllScript = GameObject.Find("PlayerCube").GetComponent<PlayerControll>();
+        PlayerControllScript = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
         if (PlayerControllScript.TimeShift == true)
         {
             if (TimeCoordinates[49, 0] == 0)
