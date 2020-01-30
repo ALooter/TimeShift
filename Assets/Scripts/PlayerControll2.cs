@@ -28,8 +28,12 @@ public class PlayerControll2 : MonoBehaviour
     public bool placemode = false;
     private LineRenderer objectLineRenderer;
     public float rotation;
-
+    public int HP = 3;
     public float playerspeed;
+    private PlayerControll PlayerControll;
+
+    //speed_coef - movement speed is multiplyed by this value (easy way to make hero faster/slower)
+    public float speed_coef;
 
     //abilities cooldowns
     public float zawarudomaxcd = 10f;
@@ -94,30 +98,39 @@ public class PlayerControll2 : MonoBehaviour
         if (collision.gameObject.tag == "Bolt")
         {
 
-            if (WorldControlScript.ZaWarudo1 == false)
+            if (ZaWarudo == false)
             {
                 OnHitDestroy bolt = collision.gameObject.GetComponent<OnHitDestroy>();
                 stun = true;
                 rb.velocity = bolt.rb.velocity;
                 Invoke("StunOver", 2f);
+                HP -= 1;
             }
         }
 
         //mineknockback
         if (collision.gameObject.tag == "Mine")
         {
-            Vector3 pushDIrection = collision.transform.position - transform.position;
-            pushDIrection = -pushDIrection.normalized;
-            GetComponent<Rigidbody>().AddForce(pushDIrection * minepushforce * 1000 * Time.deltaTime, ForceMode.VelocityChange);
-            Destroy(collision.gameObject);
+            if (ZaWarudo == false && collision.gameObject.GetComponent<Mine>().activated == true)
+            {
+                Vector3 pushDIrection = collision.transform.position - transform.position;
+                pushDIrection = -pushDIrection.normalized;
+                GetComponent<Rigidbody>().AddForce(pushDIrection * minepushforce * 1000 * Time.deltaTime, ForceMode.VelocityChange);
+                Destroy(collision.gameObject);
+                HP -= 1;
+            }
         }
         //spikesfreeze
         if (collision.gameObject.tag == "Spikes")
         {
-            StartCoroutine(FreezePlayer());
-            Destroy(collision.gameObject);
-            frostimg.enabled = true;
-            frostcd = 1f;
+            if (ZaWarudo == false && collision.gameObject.GetComponent<Spikes>().activated == true)
+            {
+                StartCoroutine(FreezePlayer());
+                Destroy(collision.gameObject);
+                frostimg.enabled = true;
+                frostcd = 1f;
+                HP -= 1;
+            }
         }
     }
     void TimeCapture()
@@ -159,13 +172,20 @@ public class PlayerControll2 : MonoBehaviour
             yield return new WaitForSeconds(0.001f);
         }
     }
+    void Death()
+    {
 
+    }
     IEnumerator FreezePlayer()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = true;
         yield return new WaitForSeconds(freezeDuration);
         rb.isKinematic = false;
+    }
+    void PlayerWorldControl()
+    {
+        ZaWarudo = false;
     }
 
     // Start is called before the first frame update
@@ -225,28 +245,39 @@ public class PlayerControll2 : MonoBehaviour
     }
     void FixedUpdate()
     {
+    
+        if (HP < 1)
+        {
+            Invoke("Death", 0f);
+        }
         //placemode 
+        PlayerControll = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
         WorldControlScript = GameObject.Find("WorldController").GetComponent<WorldControl>();
         TimeCoordinates[0, 0] = transform.position.x;
         TimeCoordinates[0, 1] = transform.position.z;
         TimeCoordinates[0, 2] = transform.rotation.y;
+        if (PlayerControll.ZaWarudo == true)
+        {
+            placemode = false;
+        }
         if (stun == false)
         {
-            //placemode trigger
-            if (Input.GetButtonDown("Construction2"))
-            {
-                //placecontainter = placemode;
-                rb.velocity = new Vector3(0, 0, 0);
-                placemode = !placemode;
-                objectLineRenderer.enabled = !objectLineRenderer.enabled;
-            }
+            if (ZaWarudo == true || (ZaWarudo == false && PlayerControll.ZaWarudo == false)) { 
+                //placemode trigger
+                if (Input.GetButtonDown("Construction2"))
+                {
+                    //placecontainter = placemode;
+                    rb.velocity = new Vector3(0, 0, 0);
+                    placemode = !placemode;
+                    objectLineRenderer.enabled = !objectLineRenderer.enabled;
+                }
 
             //rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
             if (placemode == false)
             {
                 if (Mathf.Abs(Input.GetAxis("Horizontal2")) > 0.0f || Mathf.Abs(Input.GetAxis("Vertical2")) > 0.0f)
                 {
-                    rb.velocity = new Vector3(Input.GetAxis("Horizontal2"), 0, Input.GetAxis("Vertical2"));
+                    rb.velocity = new Vector3(Input.GetAxis("Horizontal2") * speed_coef, 0, Input.GetAxis("Vertical2") * speed_coef);
                     rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
                     rotation = transform.localEulerAngles.y;
 
@@ -283,7 +314,7 @@ public class PlayerControll2 : MonoBehaviour
             {
 
                 Rigidbody clone;
-                clone = Instantiate(trap1, transform.position, transform.rotation);
+                clone = Instantiate(trap1, transform.position + new Vector3(0, 0, 2), transform.rotation);
                 balistacd = balistamaxcd;
 
 
@@ -321,10 +352,7 @@ public class PlayerControll2 : MonoBehaviour
                 mine_clone = Instantiate(spikesprefab, transform.position + 3 * spikesoffset, transform.rotation);
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                pausecanvas.enabled = true;
-            }
+            
         }
 
 
@@ -341,6 +369,7 @@ public class PlayerControll2 : MonoBehaviour
             StartCoroutine(Tracer());
             stun = false;
         }
+    }
         ZaWarudo = Input.GetButton("Zawarudo2");
         if (ZaWarudo == true && zawarudocd < 0f)
         {
@@ -350,8 +379,14 @@ public class PlayerControll2 : MonoBehaviour
             {
                 Invoke("StunOver", 0f);
             }
+            ZaWarudo = true;
+            Invoke("PlayerWorldControl", 5f);
         }
 
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausecanvas.enabled = true;
+        }
     }
+    
 }

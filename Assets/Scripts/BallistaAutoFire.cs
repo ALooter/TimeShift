@@ -48,7 +48,7 @@ public class BallistaAutoFire : MonoBehaviour
     {
         Collider = GetComponent<Collider>();
         Collider.enabled = false;
-        Invoke("Activate", 2f);
+        Invoke("Activate", 1f);
         for (i = 1; i < 50; i++)
         {
             TimeCoordinates[i, 0] = 0;
@@ -73,10 +73,10 @@ public class BallistaAutoFire : MonoBehaviour
         //int LayerMask = 1 << 11;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
-        {if (hit.collider.tag == "Player")
+        { if (hit.collider.tag == "Player")
             {
                 if (activated == true)
-                    if (WorldControlScript.ZaWarudo1 == false)
+                    if (hit.collider.GetComponent<PlayerControll>().ZaWarudo != true || hit.collider.GetComponent<PlayerControll>().ZaWarudo != true)
                     {
                         {
                             Invoke("Fire", 0f);
@@ -85,17 +85,6 @@ public class BallistaAutoFire : MonoBehaviour
                     }
             }
         }
-        PlayerControllScript = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
-        if (PlayerControllScript.TimeShift == true)
-        {
-            if (TimeCoordinates[49, 0] == 0)
-            {
-                Destroy(gameObject);
-            }
-            if (TimeCoordinates[49, 1] == 1)
-            {
-                activated = true;
-            }
-        }
+        
     }
 }

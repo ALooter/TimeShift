@@ -8,7 +8,8 @@ public class OnHitDestroy : MonoBehaviour
     public Rigidbody rb;
     GameObject projectile;
     private WorldControl WorldControlScript;
-    private PlayerControll PlayerControllScript;
+    private PlayerControll PlayerControllScript1;
+    private PlayerControll2 PlayerControllScript2;
     public Vector3 startPosition;
     public float distanceMoved;
     
@@ -29,7 +30,7 @@ public class OnHitDestroy : MonoBehaviour
             ContactPoint contact = collision.contacts[0];
             if (ricochet == true)
             {
-                if (WorldControlScript.ZaWarudo1 == false)
+                if (PlayerControllScript1.ZaWarudo == false || PlayerControllScript2.ZaWarudo == false)
                 {
                     Invoke("Destroy", 0);
                 }
@@ -43,7 +44,7 @@ public class OnHitDestroy : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         { 
-            if (WorldControlScript.ZaWarudo1 == false)
+            if (PlayerControllScript1.ZaWarudo == false || PlayerControllScript2.ZaWarudo == false)
             {
                 Invoke("Destroy", 0);
             }
@@ -61,18 +62,15 @@ public class OnHitDestroy : MonoBehaviour
     {
         rb.velocity = transform.TransformDirection(Vector3.forward * 10);
         WorldControlScript = GameObject.Find("WorldController").GetComponent<WorldControl>();
-        PlayerControllScript = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
-        if (WorldControlScript.ZaWarudo1 == true)
+        PlayerControllScript1 = GameObject.Find("PlayerCube1").GetComponent<PlayerControll>();
+        PlayerControllScript2 = GameObject.Find("PlayerCube2").GetComponent<PlayerControll2>();
+        if (PlayerControllScript1.ZaWarudo == true || PlayerControllScript2.ZaWarudo == true)
         {
             rb.velocity = rb.velocity * 0;
         }
         
         distanceMoved += Vector3.Distance(transform.position, startPosition);
         if (distanceMoved > 50000f)
-        {
-            Invoke("Destroy", 0);
-        }
-        if ( PlayerControllScript.TimeShift == true)
         {
             Invoke("Destroy", 0);
         }
