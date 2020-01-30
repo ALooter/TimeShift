@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 7155380388201726938}
   - component: {fileID: 5138685580269786764}
   - component: {fileID: 4563351785550118731}
+  - component: {fileID: 4469193229414750224}
   m_Layer: 0
   m_Name: spikes-prefa
   m_TagString: Spikes
@@ -139,3 +140,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4469193229414750224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155380388201242618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57e2466c2ccfdb4ab0cec5ff6d9b900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 2059288481531448929}
   - component: {fileID: 7427279392225731716}
   - component: {fileID: 4712734898284424800}
+  - component: {fileID: 964228567554723237}
   m_Layer: 0
   m_Name: mine-prefab
   m_TagString: Mine
@@ -139,3 +140,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1123118, y: 1.0702447, z: 1.962226}
   m_Center: {x: -0.10985285, y: 0.035122037, z: 0.16523331}
+--- !u!114 &964228567554723237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184205281730967257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62df676bcd41cd048bf3075d4f6b0a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

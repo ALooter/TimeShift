@@ -28,8 +28,9 @@ public class PlayerControll : MonoBehaviour
     public bool placemode = false;
     private LineRenderer objectLineRenderer;
     public float rotation;
-    
+    public int HP = 3;
     public float playerspeed;
+    private PlayerControll2 PlayerControll2;
 
     //speed_coef - movement speed is multiplyed by this value (easy way to make hero faster/slower)
     public float speed_coef;
@@ -97,30 +98,39 @@ public class PlayerControll : MonoBehaviour
         if (collision.gameObject.tag == "Bolt")
         {
 
-            if (WorldControlScript.ZaWarudo1 == false)
+            if (ZaWarudo == false)
             {
                 OnHitDestroy bolt = collision.gameObject.GetComponent<OnHitDestroy>();
                 stun = true;
                 rb.velocity = bolt.rb.velocity;
                 Invoke("StunOver", 2f);
+                HP -= 1;
             }
         }
 
         //mineknockback
         if (collision.gameObject.tag == "Mine")
         {
-            Vector3 pushDIrection = collision.transform.position - transform.position;
-            pushDIrection = -pushDIrection.normalized;
-            GetComponent<Rigidbody>().AddForce(pushDIrection * minepushforce * 1000 * Time.deltaTime, ForceMode.VelocityChange);
-            Destroy(collision.gameObject);
+            if (ZaWarudo == false && collision.gameObject.GetComponent<Mine>().activated == true)
+            {
+                Vector3 pushDIrection = collision.transform.position - transform.position;
+                pushDIrection = -pushDIrection.normalized;
+                GetComponent<Rigidbody>().AddForce(pushDIrection * minepushforce * 1000 * Time.deltaTime, ForceMode.VelocityChange);
+                Destroy(collision.gameObject);
+                HP -= 1;
+            }
         }
         //spikesfreeze
         if (collision.gameObject.tag == "Spikes")
         {
-            StartCoroutine(FreezePlayer());
-            Destroy(collision.gameObject);
-            frostimg.enabled = true;
-            frostcd = 1f;
+            if (ZaWarudo == false && collision.gameObject.GetComponent<Spikes>().activated == true)
+            {
+                StartCoroutine(FreezePlayer());
+                Destroy(collision.gameObject);
+                frostimg.enabled = true;
+                frostcd = 1f;
+                HP -= 1;
+            }
         }
     }
     void TimeCapture()
@@ -162,13 +172,20 @@ public class PlayerControll : MonoBehaviour
             yield return new WaitForSeconds(0.001f);
         }
     }
+    void Death()
+    {
 
+    }
     IEnumerator FreezePlayer()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = true;
         yield return new WaitForSeconds(freezeDuration);
         rb.isKinematic = false;
+    }
+    void PlayerWorldControl()
+    {
+        ZaWarudo = false;
     }
 
     // Start is called before the first frame update
@@ -228,124 +245,133 @@ public class PlayerControll : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (HP < 1)
+        {
+            Invoke("Death", 0f);
+        }
         //placemode 
+        PlayerControll2 = GameObject.Find("PlayerCube2").GetComponent<PlayerControll2>();
         WorldControlScript = GameObject.Find("WorldController").GetComponent<WorldControl>();
         TimeCoordinates[0, 0] = transform.position.x;
         TimeCoordinates[0, 1] = transform.position.z;
         TimeCoordinates[0, 2] = transform.rotation.y;
+        if (PlayerControll2.ZaWarudo == true)
+        {
+            placemode = false;
+        }
         if (stun == false)
         {
-            //placemode trigger
-
-            if (Input.GetButtonDown("Construction1"))
-
+            if (ZaWarudo == true || (ZaWarudo == false && PlayerControll2.ZaWarudo == false))
             {
-                //placecontainter = placemode;
-                rb.velocity = new Vector3(0, 0, 0);
-                placemode = !placemode;
-                objectLineRenderer.enabled = !objectLineRenderer.enabled;
-            }
+                //placemode trigger
 
-            //rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
-            if (placemode == false)
-            {
-                if (Mathf.Abs(Input.GetAxis("Horizontal1")) > 0.0f || Mathf.Abs(Input.GetAxis("Vertical1")) > 0.0f)
+                if (Input.GetButtonDown("Construction1"))
+
                 {
-                    rb.velocity = new Vector3(Input.GetAxis("Horizontal1")*speed_coef, 0, Input.GetAxis("Vertical1") * speed_coef);
-                    rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
-                    rotation = transform.localEulerAngles.y;
-                    
-                }
-                if (Mathf.Abs(Input.GetAxis("Horizontal1")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical1")) == 0.0f)
-                {
-                    transform.localEulerAngles = new Vector3(0, rotation, 0);
+                    //placecontainter = placemode;
                     rb.velocity = new Vector3(0, 0, 0);
+                    placemode = !placemode;
+                    objectLineRenderer.enabled = !objectLineRenderer.enabled;
                 }
 
-                //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-                // {
+                //rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
+                if (placemode == false)
+                {
+                    if (Mathf.Abs(Input.GetAxis("Horizontal1")) > 0.0f || Mathf.Abs(Input.GetAxis("Vertical1")) > 0.0f)
+                    {
+                        rb.velocity = new Vector3(Input.GetAxis("Horizontal1") * speed_coef, 0, Input.GetAxis("Vertical1") * speed_coef);
+                        rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
+                        rotation = transform.localEulerAngles.y;
 
-                //     transform.forward = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-                //
-                //    rb.velocity = transform.forward * playerspeed;
+                    }
+                    if (Mathf.Abs(Input.GetAxis("Horizontal1")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical1")) == 0.0f)
+                    {
+                        transform.localEulerAngles = new Vector3(0, rotation, 0);
+                        rb.velocity = new Vector3(0, 0, 0);
+                    }
 
-                // }
-                // if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
-                // {
-                //     if (stun == false)
-                //    {
-                //        rb.velocity = new Vector3(0, 0, 0);
-                //   }
-                // }
-                //if (new Vector3())
+                    //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+                    // {
+
+                    //     transform.forward = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+                    //
+                    //    rb.velocity = transform.forward * playerspeed;
+
+                    // }
+                    // if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+                    // {
+                    //     if (stun == false)
+                    //    {
+                    //        rb.velocity = new Vector3(0, 0, 0);
+                    //   }
+                    // }
+                    //if (new Vector3())
+                }
+                if (placemode == true)
+                {
+                    rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
+                }
+
+
+                if (Input.GetButtonDown("Balista1") == true && placemode == true && balistacd < 0f)
+                {
+
+                    Rigidbody clone;
+                    clone = Instantiate(trap1, transform.position + new Vector3(0, 0, 2), transform.rotation);
+                    balistacd = balistamaxcd;
+
+
+                }
+                if (Input.GetButtonDown("Kapkan1") && kapkancd <= 0)
+
+                {
+                    kapkancd = kapkanmaxcd;
+
+                }
+
+
+                if (Input.GetButtonDown("Mine1") && minecd <= 0)
+
+                {
+                    minecd = minemaxcd;
+                    Vector3 mineoffset;
+                    mineoffset.x = Input.GetAxisRaw("Horizontal1");
+                    mineoffset.y = 0f;
+                    mineoffset.z = Input.GetAxisRaw("Vertical1");
+                    Rigidbody mine_clone;
+                    mine_clone = Instantiate(mineprefab, transform.position + 3 * mineoffset, transform.rotation);
+                }
+
+
+                if (Input.GetButtonDown("Spikes1") && spikescd <= 0)
+
+                {
+                    spikescd = spikesmaxcd;
+                    Vector3 spikesoffset;
+                    spikesoffset.x = Input.GetAxisRaw("Horizontal1");
+                    spikesoffset.y = 0f;
+                    spikesoffset.z = Input.GetAxisRaw("Vertical1");
+                    Rigidbody mine_clone;
+                    mine_clone = Instantiate(spikesprefab, transform.position + 3 * spikesoffset, transform.rotation);
+                }
+
+                
             }
-            if (placemode == true)
+
+
+
+            TimeShift = Input.GetButton("Timeshift1");
+            if (TimeShift == true && timeshiftcd < 0f)
             {
-                rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1")) * Mathf.Rad2Deg), 0));
+                timeshiftcd = timeshiftmaxcd;
+                if (stun == true)
+                {
+                    Invoke("StunOver", 0f);
+                }
+                stun = true;
+                StartCoroutine(Tracer());
+                stun = false;
             }
-
-
-            if (Input.GetButtonDown("Balista1") == true && placemode == true && balistacd < 0f)
-        {
-
-                Rigidbody clone;
-                clone = Instantiate(trap1, transform.position, transform.rotation);
-                balistacd = balistamaxcd;
-
-
-        }
-            if (Input.GetButtonDown("Kapkan1") && kapkancd <= 0)
-
-            {
-                kapkancd = kapkanmaxcd;
-
-            }
-
-
-            if (Input.GetButtonDown("Mine1") && minecd <= 0)
-
-            {
-                minecd = minemaxcd;
-                Vector3 mineoffset;
-                mineoffset.x = Input.GetAxisRaw("Horizontal1");
-                mineoffset.y = 0f;
-                mineoffset.z = Input.GetAxisRaw("Vertical1");
-                Rigidbody mine_clone;
-                mine_clone = Instantiate(mineprefab, transform.position + 3 * mineoffset, transform.rotation);
-            }
-
-
-            if (Input.GetButtonDown("Spikes1") && spikescd <= 0)
-
-            {
-                spikescd = spikesmaxcd;
-                Vector3 spikesoffset;
-                spikesoffset.x = Input.GetAxisRaw("Horizontal1");
-                spikesoffset.y = 0f;
-                spikesoffset.z = Input.GetAxisRaw("Vertical1");
-                Rigidbody mine_clone;
-                mine_clone = Instantiate(spikesprefab, transform.position + 3 * spikesoffset, transform.rotation);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                pausecanvas.enabled = true;
-            }
-        }
-
-
-        
-        TimeShift = Input.GetButton("Timeshift1");
-        if (TimeShift == true && timeshiftcd < 0f)
-        {
-            timeshiftcd = timeshiftmaxcd;
-            if (stun == true)
-            {
-                Invoke("StunOver", 0f);
-            }
-            stun = true;
-            StartCoroutine(Tracer());
-            stun = false;
         }
         ZaWarudo = Input.GetButton("Zawarudo1");
         if (ZaWarudo == true && zawarudocd < 0f)
@@ -356,8 +382,13 @@ public class PlayerControll : MonoBehaviour
             {
                 Invoke("StunOver", 0f);
             }
+            ZaWarudo = true;
+            Invoke("PlayerWorldControl", 5f);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausecanvas.enabled = true;
         }
 
-        
     }
 }
