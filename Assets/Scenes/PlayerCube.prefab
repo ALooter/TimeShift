@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 116733972}
-  - component: {fileID: 116733975}
   - component: {fileID: 116733974}
   - component: {fileID: 116733973}
   m_Layer: 0
@@ -33,14 +32,6 @@ Transform:
   m_Father: {fileID: 3641259407330677523}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &116733975
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116733971}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &116733974
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -169,7 +160,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3641259407330677523}
-  - component: {fileID: 5954405112996979897}
   - component: {fileID: 8709256643420560581}
   - component: {fileID: 5257551554118743875}
   - component: {fileID: 317874875}
@@ -198,14 +188,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5954405112996979897
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053311534383047091}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8709256643420560581
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -396,7 +378,9 @@ MonoBehaviour:
   Ricochet: {x: 0, y: 0, z: 0}
   placemode: 0
   rotation: 0
+  HP: 3
   playerspeed: 5
+  speed_coef: 0
   zawarudomaxcd: 10
   zawarudocd: 0
   balistamaxcd: 10
@@ -424,4 +408,15 @@ MonoBehaviour:
   freezeDuration: 2
   spikesprefab: {fileID: 4563351785550118731, guid: 4715d2264e654b848b6d54eeb6a530a9,
     type: 3}
+  heart1: {fileID: 0}
+  heart2: {fileID: 0}
+  heart3: {fileID: 0}
   pausecanvas: {fileID: 0}
+  balistaplacedsfx: {fileID: 0}
+  balistadamagesfx: {fileID: 0}
+  minedamagesfx: {fileID: 0}
+  spikesdamagesfx: {fileID: 0}
+  explosionsfx: {fileID: 0}
+  timeshiftsfx: {fileID: 0}
+  zawarudosfx: {fileID: 0}
+  sfxSource: {fileID: 0}

@@ -78,7 +78,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6520542627116579941}
-  - component: {fileID: 4203986266445417423}
   - component: {fileID: 1164385138803930035}
   - component: {fileID: 2306783724078962741}
   - component: {fileID: 7563167595426188749}
@@ -107,14 +106,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4203986266445417423
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4803738206483566277}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1164385138803930035
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -137,7 +128,7 @@ MeshRenderer:
     firstSubMesh: 0
     subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
+  m_ProbeAnchor: {fileID: 400006, guid: cc0623bff99d5094c8f5a4b42b2c26cd, type: 3}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
@@ -305,7 +296,9 @@ MonoBehaviour:
   Ricochet: {x: 0, y: 0, z: 0}
   placemode: 0
   rotation: 0
+  HP: 3
   playerspeed: 5
+  speed_coef: 0
   zawarudomaxcd: 10
   zawarudocd: 0
   balistamaxcd: 10
@@ -333,7 +326,18 @@ MonoBehaviour:
   freezeDuration: 2
   spikesprefab: {fileID: 4563351785550118731, guid: 4715d2264e654b848b6d54eeb6a530a9,
     type: 3}
+  heart1: {fileID: 0}
+  heart2: {fileID: 0}
+  heart3: {fileID: 0}
   pausecanvas: {fileID: 0}
+  balistaplacedsfx2: {fileID: 0}
+  balistadamagesfx2: {fileID: 0}
+  minedamagesfx2: {fileID: 0}
+  spikesdamagesfx2: {fileID: 0}
+  explosionsfx2: {fileID: 0}
+  timeshiftsfx2: {fileID: 0}
+  zawarudosfx2: {fileID: 0}
+  sfxSource: {fileID: 0}
 --- !u!1 &7563167595627075429
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +347,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7563167595627075426}
-  - component: {fileID: 7563167595627075425}
   - component: {fileID: 7563167595627075424}
   - component: {fileID: 7563167595627075427}
   m_Layer: 0
@@ -367,14 +370,6 @@ Transform:
   m_Father: {fileID: 6520542627116579941}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7563167595627075425
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7563167595627075429}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &7563167595627075424
 MeshRenderer:
   m_ObjectHideFlags: 0
