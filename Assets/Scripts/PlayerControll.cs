@@ -88,8 +88,19 @@ public class PlayerControll : MonoBehaviour
 
 
     //---audio---
-    public static AudioClip balistaplacedsfx, balistadamagesfx, minedamagesfx, spikesdamagesfx, explosionsfx, timeshiftsfx, zawarudosfx;
-    public static AudioSource audiosrc;
+    public AudioClip balistaplacedsfx, balistadamagesfx, minedamagesfx, spikesdamagesfx, explosionsfx, timeshiftsfx, zawarudosfx;
+    //public static AudioSource audiosrc;
+    public AudioSource sfxSource;
+
+    public void PlaySFX(AudioClip clip)
+    {
+
+        //Set the clip of our efxSource audio source to the clip passed in as a parameter.
+        sfxSource.clip = clip;
+
+        //Play the clip.
+        sfxSource.Play();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -113,7 +124,7 @@ public class PlayerControll : MonoBehaviour
                 rb.velocity = bolt.rb.velocity;
                 Invoke("StunOver", 2f);
                 HP -= 1;
-                soundmanagerscript.PlaySFX("balistadamagesfx");
+                PlaySFX(balistadamagesfx);
             }
         }
 
@@ -127,7 +138,7 @@ public class PlayerControll : MonoBehaviour
                 GetComponent<Rigidbody>().AddForce(pushDIrection * minepushforce * 1000 * Time.deltaTime, ForceMode.VelocityChange);
                 Destroy(collision.gameObject);
                 HP -= 1;
-                soundmanagerscript.PlaySFX("minedamagesfx");
+                PlaySFX(minedamagesfx);
             }
         }
         //spikesfreeze
@@ -140,7 +151,7 @@ public class PlayerControll : MonoBehaviour
                 frostimg.enabled = true;
                 frostcd = 1f;
                 HP -= 1;
-                soundmanagerscript.PlaySFX("spikesdamagesfx");
+                PlaySFX(spikesdamagesfx);
             }
         }
     }
@@ -350,7 +361,7 @@ public class PlayerControll : MonoBehaviour
                     Rigidbody clone;
                     clone = Instantiate(trap1, transform.position + new Vector3(0, 0, 2), transform.rotation);
                     balistacd = balistamaxcd;
-                    soundmanagerscript.PlaySFX("balistaplacedsfx");
+                    PlaySFX(balistaplacedsfx);
 
                 }
                 if (Input.GetButtonDown("Kapkan1") && kapkancd <= 0)
@@ -396,7 +407,7 @@ public class PlayerControll : MonoBehaviour
             if (TimeShift == true && timeshiftcd < 0f)
             {
                 timeshiftcd = timeshiftmaxcd;
-                soundmanagerscript.PlaySFX("timeshiftsfx");
+                PlaySFX(timeshiftsfx);
                 if (stun == true)
                 {
                     Invoke("StunOver", 0f);
@@ -411,7 +422,7 @@ public class PlayerControll : MonoBehaviour
         {
             zawarudocd = zawarudomaxcd;
             playerlight.color = Color.blue;
-            soundmanagerscript.PlaySFX("zawarudosfx");
+            PlaySFX(zawarudosfx);
             if (stun == true)
             {
                 Invoke("StunOver", 0f);
