@@ -12,6 +12,7 @@ public class soundmanagerscript : MonoBehaviour
     
     void Start()
     {
+
         balistaplacedsfx = Resources.Load<AudioClip>("balistaplaced1");
         balistadamagesfx = Resources.Load<AudioClip>("balistadamagesfx");
         minedamagesfx = Resources.Load<AudioClip>("mine1");
@@ -25,6 +26,8 @@ public class soundmanagerscript : MonoBehaviour
         spikesdamagesfx2 = Resources.Load<AudioClip>("damag");
         timeshiftsfx2 = Resources.Load<AudioClip>("hrhrhr");
         zawarudosfx2 = Resources.Load<AudioClip>("zavar3");
+
+        audiosrc = GetComponent<AudioSource>();
     }
 
     
