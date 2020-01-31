@@ -78,10 +78,18 @@ public class PlayerControll : MonoBehaviour
     public float freezeDuration = 2f;
     public Rigidbody spikesprefab;
 
+    //hp ui
+    public Image heart1;
+    public Image heart2;
+    public Image heart3;
 
     //pauseui
     public Canvas pausecanvas;
 
+
+    //---audio---
+    public static AudioClip balistaplacedsfx, balistadamagesfx, minedamagesfx, spikesdamagesfx, explosionsfx, timeshiftsfx, zawarudosfx;
+    public static AudioSource audiosrc;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -105,6 +113,7 @@ public class PlayerControll : MonoBehaviour
                 rb.velocity = bolt.rb.velocity;
                 Invoke("StunOver", 2f);
                 HP -= 1;
+                soundmanagerscript.PlaySFX("balistadamagesfx");
             }
         }
 
@@ -118,6 +127,7 @@ public class PlayerControll : MonoBehaviour
                 GetComponent<Rigidbody>().AddForce(pushDIrection * minepushforce * 1000 * Time.deltaTime, ForceMode.VelocityChange);
                 Destroy(collision.gameObject);
                 HP -= 1;
+                soundmanagerscript.PlaySFX("minedamagesfx");
             }
         }
         //spikesfreeze
@@ -130,6 +140,7 @@ public class PlayerControll : MonoBehaviour
                 frostimg.enabled = true;
                 frostcd = 1f;
                 HP -= 1;
+                soundmanagerscript.PlaySFX("spikesdamagesfx");
             }
         }
     }
@@ -215,6 +226,7 @@ public class PlayerControll : MonoBehaviour
         objectLineRenderer.enabled = false;
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -241,6 +253,25 @@ public class PlayerControll : MonoBehaviour
         if (zawarudocd <= 5f)
         {
             playerlight.color = playerlightcolor;
+        }
+
+        if (HP == 3)
+        {
+            heart1.gameObject.SetActive(true);
+            heart2.gameObject.SetActive(true);
+            heart3.gameObject.SetActive(true);
+        }
+        if (HP == 2)
+        {
+            heart1.gameObject.SetActive(true);
+            heart2.gameObject.SetActive(true);
+            heart3.gameObject.SetActive(false);
+        }
+        if (HP == 1)
+        {
+            heart1.gameObject.SetActive(true);
+            heart2.gameObject.SetActive(false);
+            heart3.gameObject.SetActive(false);
         }
     }
     void FixedUpdate()
@@ -284,7 +315,7 @@ public class PlayerControll : MonoBehaviour
                         rotation = transform.localEulerAngles.y;
 
                     }
-                    if (Mathf.Abs(Input.GetAxis("Horizontal1")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical1")) == 0.0f)
+                    if (Mathf.Abs(Input.GetAxis("Horizontal1")) <= 0.03f && Mathf.Abs(Input.GetAxis("Vertical1")) <= 0.03f)
                     {
                         transform.localEulerAngles = new Vector3(0, rotation, 0);
                         rb.velocity = new Vector3(0, 0, 0);
@@ -319,7 +350,7 @@ public class PlayerControll : MonoBehaviour
                     Rigidbody clone;
                     clone = Instantiate(trap1, transform.position + new Vector3(0, 0, 2), transform.rotation);
                     balistacd = balistamaxcd;
-
+                    soundmanagerscript.PlaySFX("balistaplacedsfx");
 
                 }
                 if (Input.GetButtonDown("Kapkan1") && kapkancd <= 0)
@@ -340,6 +371,7 @@ public class PlayerControll : MonoBehaviour
                     mineoffset.z = Input.GetAxisRaw("Vertical1");
                     Rigidbody mine_clone;
                     mine_clone = Instantiate(mineprefab, transform.position + 3 * mineoffset, transform.rotation);
+
                 }
 
 
@@ -364,6 +396,7 @@ public class PlayerControll : MonoBehaviour
             if (TimeShift == true && timeshiftcd < 0f)
             {
                 timeshiftcd = timeshiftmaxcd;
+                soundmanagerscript.PlaySFX("timeshiftsfx");
                 if (stun == true)
                 {
                     Invoke("StunOver", 0f);
@@ -378,6 +411,7 @@ public class PlayerControll : MonoBehaviour
         {
             zawarudocd = zawarudomaxcd;
             playerlight.color = Color.blue;
+            soundmanagerscript.PlaySFX("zawarudosfx");
             if (stun == true)
             {
                 Invoke("StunOver", 0f);

@@ -78,10 +78,18 @@ public class PlayerControll2 : MonoBehaviour
     public float freezeDuration = 2f;
     public Rigidbody spikesprefab;
 
+    //hp ui
+    public Image heart1;
+    public Image heart2;
+    public Image heart3;
 
     //pauseui
     public Canvas pausecanvas;
 
+
+    //---audio---
+    //public static AudioClip balistaplacedsfx, balistadamagesfx, minedamagesfx, spikesdamagesfx, explosionsfx, timeshiftsfx, zawarudosfx;
+    //public static AudioSource audiosrc;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -105,6 +113,7 @@ public class PlayerControll2 : MonoBehaviour
                 rb.velocity = bolt.rb.velocity;
                 Invoke("StunOver", 2f);
                 HP -= 1;
+                soundmanagerscript.PlaySFX("balistadamagesfx2");
             }
         }
 
@@ -118,6 +127,7 @@ public class PlayerControll2 : MonoBehaviour
                 GetComponent<Rigidbody>().AddForce(pushDIrection * minepushforce * 1000 * Time.deltaTime, ForceMode.VelocityChange);
                 Destroy(collision.gameObject);
                 HP -= 1;
+                soundmanagerscript.PlaySFX("minedamagesfx2");
             }
         }
         //spikesfreeze
@@ -130,6 +140,7 @@ public class PlayerControll2 : MonoBehaviour
                 frostimg.enabled = true;
                 frostcd = 1f;
                 HP -= 1;
+                soundmanagerscript.PlaySFX("spikessfx2");
             }
         }
     }
@@ -213,7 +224,10 @@ public class PlayerControll2 : MonoBehaviour
         //line renderer
         objectLineRenderer = rb.GetComponent<LineRenderer>();
         objectLineRenderer.enabled = false;
+
+
     }
+
 
     // Update is called once per frame
     void Update()
@@ -241,6 +255,25 @@ public class PlayerControll2 : MonoBehaviour
         if (zawarudocd <= 5f)
         {
             playerlight.color = playerlightcolor;
+        }
+
+        if (HP == 3)
+        {
+            heart1.gameObject.SetActive(true);
+            heart2.gameObject.SetActive(true);
+            heart3.gameObject.SetActive(true);
+        }
+        if (HP == 2)
+        {
+            heart1.gameObject.SetActive(true);
+            heart2.gameObject.SetActive(true);
+            heart3.gameObject.SetActive(false);
+        }
+        if (HP == 1)
+        {
+            heart1.gameObject.SetActive(true);
+            heart2.gameObject.SetActive(false);
+            heart3.gameObject.SetActive(false);
         }
     }
     void FixedUpdate()
@@ -272,21 +305,21 @@ public class PlayerControll2 : MonoBehaviour
                     objectLineRenderer.enabled = !objectLineRenderer.enabled;
                 }
 
-            //rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
-            if (placemode == false)
-            {
-                if (Mathf.Abs(Input.GetAxis("Horizontal2")) > 0.0f || Mathf.Abs(Input.GetAxis("Vertical2")) > 0.0f)
+                //rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
+                if (placemode == false)
                 {
-                    rb.velocity = new Vector3(Input.GetAxis("Horizontal2") * speed_coef, 0, Input.GetAxis("Vertical2") * speed_coef);
-                    rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
-                    rotation = transform.localEulerAngles.y;
+                    if (Mathf.Abs(Input.GetAxis("Horizontal2")) > 0.5f || Mathf.Abs(Input.GetAxis("Vertical2")) > 0.5f)
+                    {
+                        rb.velocity = new Vector3(Input.GetAxis("Horizontal2") * speed_coef, 0, Input.GetAxis("Vertical2") * speed_coef);
+                        rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
+                        rotation = transform.localEulerAngles.y;
 
-                }
-                if (Mathf.Abs(Input.GetAxis("Horizontal2")) == 0.0f && Mathf.Abs(Input.GetAxis("Vertical2")) == 0.0f)
-                {
-                    transform.localEulerAngles = new Vector3(0, rotation, 0);
-                    rb.velocity = new Vector3(0, 0, 0);
-                }
+                    }
+                    if (Mathf.Abs(Input.GetAxis("Horizontal2")) <= 0.03f && Mathf.Abs(Input.GetAxis("Vertical2")) <= 0.03f)
+                    {
+                        transform.localEulerAngles = new Vector3(0, rotation, 0);
+                        rb.velocity = new Vector3(0, 0, 0);
+                    }
 
                 //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                 // {
@@ -304,7 +337,7 @@ public class PlayerControll2 : MonoBehaviour
                 //   }
                 // }
                 //if (new Vector3())
-            }
+                }
             if (placemode == true)
             {
                 rb.rotation = Quaternion.Euler(new Vector3(0, (Mathf.Atan2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2")) * Mathf.Rad2Deg), 0));
@@ -316,9 +349,10 @@ public class PlayerControll2 : MonoBehaviour
                 Rigidbody clone;
                 clone = Instantiate(trap1, transform.position + new Vector3(0, 0, 2), transform.rotation);
                 balistacd = balistamaxcd;
+                    soundmanagerscript.PlaySFX("balistaplacedsfx2");
 
 
-            }
+                }
             if (Input.GetButtonDown("Kapkan2") && kapkancd <= 0)
 
             {
@@ -361,7 +395,8 @@ public class PlayerControll2 : MonoBehaviour
         if (TimeShift == true && timeshiftcd < 0f)
         {
             timeshiftcd = timeshiftmaxcd;
-            if (stun == true)
+                soundmanagerscript.PlaySFX("timeshiftsfx2");
+                if (stun == true)
             {
                 Invoke("StunOver", 0f);
             }
@@ -375,6 +410,7 @@ public class PlayerControll2 : MonoBehaviour
         {
             zawarudocd = zawarudomaxcd;
             playerlight.color = Color.blue;
+            soundmanagerscript.PlaySFX("zawarudosfx2");
             if (stun == true)
             {
                 Invoke("StunOver", 0f);
